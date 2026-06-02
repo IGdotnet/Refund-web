@@ -1,5 +1,7 @@
+import { Button } from "../components/Button"
 import { Input } from "../components/Input"
 import React, { useState } from "react"
+import searchSvg from "../assets/search.svg"
 
 export function Dashboard() {
     const [name, setName] = useState("")
@@ -14,6 +16,8 @@ export function Dashboard() {
             <h1 className="text-gray-100 font-bold text-xl flex-1">Solicitações</h1>
             <form className="flex flex-1 items-center justify-between pb-6 border-b-[1px] border-b-gray-400 md:flex-row gap-2 mt-6" onSubmit={fetchRefounds}>
                 <Input required placeholder="Pesquisar pelo nome" onChange={(e) => setName(e.target.value)}/>
+
+            <Button variant="icon"><img src={searchSvg} alt="Procurar" /></Button>
             </form>
         </div>
     )
