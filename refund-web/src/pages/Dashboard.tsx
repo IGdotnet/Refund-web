@@ -1,6 +1,7 @@
 import { Button } from "../components/Button"
 import { Input } from "../components/Input"
 import { RefundItem } from "../components/RefundItem"
+import { formatCurrency } from "../utils/formatCurrency"
 
 import React, { useState } from "react"
 
@@ -11,7 +12,7 @@ const REFUND_EXEMPLE= {
     id: "123",
     name: "Coisa",
     category: "Coisa2",
-    amount: "35,50",
+    amount: formatCurrency(34.5),
     categoryImg: CATEGORIES["transports"].icon,
 
 }
