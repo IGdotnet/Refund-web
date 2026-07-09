@@ -11,7 +11,7 @@ const isLoading = true
 
 const session = {
     user: {
-        role: "manager",
+        role: "",
     },
 }
 
