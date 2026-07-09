@@ -28,9 +28,9 @@ export function Routes() {
     }
 
     
-    if(isLoading) {
-        return <Loading />
-    }
+    //if(isLoading) {
+    //    return <Loading />
+    //}
     return (
         <BrowserRouter>
             <Route />

@@ -15,7 +15,7 @@ const signUpSchema = z.object({
     passwordConfirm: z.string({message:"Confirme a senha"}),
 }).refine((data) => data.password === data.passwordConfirm, {
     message: "As senhas não são iguais",
-    path: ["passwordConfirm"]
+    path: ["passwordConfirm"],
 })
 
 export function SignUp() {
@@ -35,7 +35,7 @@ export function SignUp() {
             setIsLoading(true)
 
             const data = signUpSchema.parse({
-                nome,
+                name: nome,
                 email,
                 password,
                 passwordConfirm,
