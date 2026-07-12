@@ -1,7 +1,6 @@
 import { BrowserRouter, Route } from "react-router";
-import { use } from "react";
 
-import { AuthContext } from "../contexts/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 import { Loading } from "../components/Loading";
 
@@ -20,7 +19,7 @@ const session = {
 
 export function Routes() {
 
-    const context = use(AuthContext)
+    const context = useAuth()
 
     function Route(){
         switch(session?.user.role) {
