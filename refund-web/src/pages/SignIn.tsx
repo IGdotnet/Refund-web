@@ -46,8 +46,8 @@ export function SignIn() {
 
         try {
             const data = signInScheme.parse({
-            email: formData.get("email"),
-            password: formData.get("password"),
+                email: formData.get("email"),
+                password: formData.get("password"),
             })
 
             const response = await api.post("/sessions", data)
