@@ -8,8 +8,10 @@ import { AuthRoutes } from "./AuthRoutes";
 
 import { EmployeeRoutes } from "./EmployeeRoutes";
 import { ManagerRoutes } from "./ManagerRoutes";
+import { Dashboard } from "../pages/Dashboard";
+import { SignIn } from "../pages/SignIn";
 
-const isLoading = true
+const isLoading = false
 
 const session = {
     user: {
@@ -33,9 +35,9 @@ export function Routes() {
     }
 
     
-    //if(isLoading) {
-    //    return <Loading />
-    //}
+    if(isLoading) {
+        return <Loading />
+    }
     return (
         <BrowserRouter>
             <Route />
