@@ -11,12 +11,10 @@ import { ManagerRoutes } from "./ManagerRoutes";
 import { Dashboard } from "../pages/Dashboard";
 import { SignIn } from "../pages/SignIn";
 
-const isLoading = false
-
 
 export function Routes() {
 
-    const { session } = useAuth()
+    const { session, isLoading} = useAuth()
 
     function Route(){
         switch(session?.user.role) {
