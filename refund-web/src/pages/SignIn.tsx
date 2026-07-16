@@ -4,6 +4,7 @@ import { z, ZodError } from "zod"
 import { Axios, AxiosError } from "axios"
 
 import { api } from "../services/api"
+import { useAuth } from "../hooks/useAuth"
 
 import { Input } from "../components/Input"
 import { Button } from "../components/Button"
@@ -24,6 +25,8 @@ export function SignIn() {
     //O que retornamos dentro da Action fica dentro do state
     const [state, formAction, isLoading] = useActionState(onAction, null
         /*{email: "Igor@email.com", password: "123"}*/)
+
+    const auth =  useAuth()
 
 
     //Recupera as informações de e-mail e senha digitados pelo usuário
@@ -48,6 +51,7 @@ export function SignIn() {
             })
 
             const response = await api.post("/sessions", data)
+            auth.save(response.data)
 
         } catch (error) {
             console.log(error)
