@@ -7,7 +7,7 @@ type Props = React.ComponentProps<"input"> & {
 export function Upload({ filename = null, ...rest } : Props) {
     return(
         <div>
-            <legend className="uppercase text-xxs text-gray-200 mb-2 text-inherted">Comporvante</legend>
+            <legend className="uppercase text-xxs text-gray-200 mb-2 text-inherted">Comprovante</legend>
 
             <div className="w-full h-12 flex items-center rounded-lg border border-gray-300 text-sm text-gray-100 bg-transparent outline-none">
                 <input type="file" id="upload" className="hidden" {...rest}/>
