@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router"
 import { useParams } from "react-router"
 import { z } from "zod"
-import { Axios, AxiosError } from "axios"
+import { AxiosError } from "axios"
 
 import { api } from "../services/api"
 
@@ -39,7 +39,20 @@ export function Refund() {
         }
 
         try {
-            setIsLoading(true)
+            setIsLoading(true) 
+
+            if(!filename) {
+                return alert("Selecione um arquivo!")
+            }
+
+            //Quando vamos mandar um arquivo como requisição para api, não podemos pegar só o endereço, precisamos dele inteiro
+            //Cria um formulário para levar o arquivo para api
+            const fileUploadForm = new FormData()
+            //Utiliza o append para o anexar o arquivo como "campo", precisa ser o mesmo nome do campo da api
+            fileUploadForm.append("file", filename)
+
+            //A api pode ou não modificar o nome do arquivo, então pegamos o filename vindo do response
+            const response = await api.post("/uploads", fileUploadForm)
 
             const data = refundSchema.parse({
                 name,
@@ -49,7 +62,7 @@ export function Refund() {
 
             console.log(data)
 
-            await api.post("/refunds", { ...data, filename: "12344567890123921481743762523432.png" })
+            await api.post("/refunds", { ...data, filename: response.data.filename })
 
             navigate("/confirm", { state: {fromSubmit: true}} )
         } catch (error) {
