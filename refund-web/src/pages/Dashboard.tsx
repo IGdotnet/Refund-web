@@ -4,7 +4,10 @@ import { RefundItem, type RefundItemProps } from "../components/RefundItem"
 import { formatCurrency } from "../utils/formatCurrency"
 import { Pagination } from "../components/Pagination"
 
-import React, { act, useState } from "react"
+import React, { act, useState, useEffect } from "react"
+
+import { api } from "../services/api"
+import { Axios, AxiosError } from "axios"
 
 import searchSvg from "../assets/search.svg"
 import { CATEGORIES } from "../utils/categories"
@@ -18,15 +21,25 @@ const REFUND_EXEMPLE= {
 
 }
 
+const PER_PAGE = 5
+
 export function Dashboard() {
     const [name, setName] = useState("")
     const [page, setPage] = useState(1)
-    const [totalOfPage, seTotalOfPage] = useState(10)
+    const [totalOfPage, seTotalOfPage] = useState(0)
     const [refunds, setRefunds] = useState<RefundItemProps[]>([REFUND_EXEMPLE])
 
-    function fetchRefounds(e: React.FormEvent) {
-        e.preventDefault()
-        console.log(name)
+    async function fetchRefounds() {
+        //Na api vemos que passamos como query params
+        try {
+            const response = await api.get<refundsPaginationAPIResponse>(`/refunds?name=${name.trim()}&page=${page}&perPage=${PER_PAGE}`)
+        } catch (error) {
+            if(error instanceof AxiosError) {
+                return alert(error.response?.data.message)
+            }
+
+            alert("Não foi possível carregar!")
+        }
     }
 
     function handlePagination(action: "next" | "previous") {
@@ -42,6 +55,10 @@ export function Dashboard() {
             return prevPage
         })
     }
+
+    useEffect(() => {
+        fetchRefounds()
+    }, [])
 
     return (
         <div className="bg-gray-500 rounded-xl p-10 md:min-w-[768px]">
